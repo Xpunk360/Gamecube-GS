@@ -11,14 +11,15 @@ let totalSpace = 0;
 let remainingSpace = 0;
 let selectedGames = [];
 
-// JUEGOS (EJEMPLO)
+// ===== JUEGOS =====
 const games = [
     { name: "Mario Sunshine", size: 1.35, region: "USA", image: "mario_sunshine.jpg" },
     { name: "Zelda Wind Waker", size: 1.42, region: "USA", image: "zelda_windwaker.jpg" },
-    { name: "Metroid Prime", size: 1.55, region: "USA", image: "metroid_prime.jpg" }
+    { name: "Metroid Prime", size: 1.55, region: "USA", image: "metroid_prime.jpg" },
+    { name: "Super Smash Bros. Melee", size: 1.55, region: "USA", image: "smash_melee.jpg" }
 ];
 
-// INTRO
+// ===== INTRO =====
 intro.addEventListener("click", () => {
     audio.currentTime = 0;
     audio.play();
@@ -29,7 +30,7 @@ audio.onended = () => {
     memorySelect.classList.remove("hidden");
 };
 
-// SELECCIÓN DE MEMORIA
+// ===== SELECCIÓN DE MEMORIA =====
 function selectMemory(size) {
     totalSpace = size;
     remainingSpace = size;
@@ -41,12 +42,12 @@ function selectMemory(size) {
     renderGames();
 }
 
-// ACTUALIZAR ESPACIO
+// ===== ACTUALIZAR ESPACIO =====
 function updateStorage() {
     storageText.textContent = `Espacio disponible: ${remainingSpace.toFixed(2)} GB`;
 }
 
-// RENDER JUEGOS
+// ===== RENDER JUEGOS =====
 function renderGames() {
     gamesList.innerHTML = "";
 
@@ -69,7 +70,7 @@ function renderGames() {
     });
 }
 
-// AGREGAR / QUITAR
+// ===== AGREGAR / QUITAR =====
 function toggleGame(index) {
     const game = games[index];
 
@@ -89,7 +90,7 @@ function toggleGame(index) {
     renderGames();
 }
 
-// MODAL
+// ===== MODAL CONFIRMACIÓN =====
 function openConfirm() {
     if (selectedGames.length === 0) {
         alert("No has seleccionado juegos");
@@ -107,8 +108,7 @@ function confirmYes() {
     sendWhatsApp();
 }
 
-
-// TXT
+// ===== TXT =====
 function generateTXT() {
     let text = `Micro SD: ${totalSpace}GB\n\nJuegos:\n`;
 
@@ -123,6 +123,8 @@ function generateTXT() {
     link.download = "lista_juegos.txt";
     link.click();
 }
+
+// ===== WHATSAPP =====
 function sendWhatsApp() {
     let message = `🎮 Lista GameCube\n\n`;
     message += `Micro SD: ${totalSpace}GB\n`;
@@ -133,7 +135,7 @@ function sendWhatsApp() {
         message += `• ${g.name} (${g.region}) - ${g.size}GB\n`;
     });
 
-    const phone = "528682583401"; // ← TU NÚMERO AQUÍ
+    const phone = "528682583401"; // ← TU NÚMERO
     const url = `https://wa.me/${phone}?text=${encodeURIComponent(message)}`;
 
     window.open(url, "_blank");
