@@ -1,10 +1,12 @@
+const PAGE_PASSWORD = "gamecube360";
+let pendingMemory = null;
+
 const audio = document.getElementById("gc-audio");
 const intro = document.getElementById("intro");
 const memorySelect = document.getElementById("memory-select");
 const gamesScreen = document.getElementById("games-screen");
 const storageText = document.getElementById("storage-text");
 const gamesList = document.getElementById("games-list");
-const sendBtn = document.getElementById("send-btn");
 const confirmModal = document.getElementById("confirm-modal");
 
 let totalSpace = 0;
@@ -13,7 +15,7 @@ let selectedGames = [];
 
 // ===== JUEGOS =====
 const games = [
-    { name: "Mario Sunshine", size: 1.35, region: "USA", image: "mario_sunshine.jpg" },
+{ name: "Mario Sunshine", size: 1.35, region: "USA", image: "mario_sunshine.jpg" },
     { name: "Zelda Wind Waker", size: 1.42, region: "USA", image: "zelda_windwaker.jpg" },
     { name: "Metroid Prime", size: 1.29, region: "USA", image: "metroid_prime.jpg" },
     { name: "Animal Crossing", size: .263, region: "USA", image: "g5.jpg" },
@@ -78,7 +80,6 @@ const games = [
     { name: "Eternal Darkness Sanity's Requiem", size: 1.35, region: "USA", image: "g62.jpg" },
     { name: "Phantasy Star Online Episode l & Plus", size: 1.35, region: "USA", image: "g63.jpg" },
     { name: "Phantasy Star Online Episode lll", size: 1.35, region: "USA", image: "g64.jpg" }
-
 ];
 
 // ===== INTRO =====
@@ -92,8 +93,34 @@ audio.onended = () => {
     memorySelect.classList.remove("hidden");
 };
 
-// ===== SELECCIÓN DE MEMORIA =====
+// ===== CLICK MEMORIA (ABRE PASSWORD) =====
 function selectMemory(size) {
+    pendingMemory = size;
+    document.getElementById("password-modal").classList.remove("hidden");
+}
+
+// ===== PASSWORD =====
+function checkPassword() {
+    const input = document.getElementById("password-input").value;
+    const error = document.getElementById("password-error");
+
+    if (input === PAGE_PASSWORD) {
+        error.style.display = "none";
+        document.getElementById("password-modal").classList.add("hidden");
+        document.getElementById("password-input").value = "";
+        startGames(pendingMemory);
+    } else {
+        error.style.display = "block";
+    }
+}
+
+function closePasswordModal() {
+    document.getElementById("password-modal").classList.add("hidden");
+    document.getElementById("password-input").value = "";
+}
+
+// ===== ENTRAR A JUEGOS =====
+function startGames(size) {
     totalSpace = size;
     remainingSpace = size;
 
@@ -104,9 +131,17 @@ function selectMemory(size) {
     renderGames();
 }
 
-// ===== ACTUALIZAR ESPACIO =====
+// ===== ESPACIO =====
 function updateStorage() {
     storageText.textContent = `Espacio disponible: ${remainingSpace.toFixed(2)} GB`;
+    updateStorageBar();
+}
+
+function updateStorageBar() {
+    const used = totalSpace - remainingSpace;
+    const percent = (used / totalSpace) * 100;
+    const bar = document.getElementById("storage-fill");
+    if (bar) bar.style.width = percent + "%";
 }
 
 // ===== RENDER JUEGOS =====
@@ -114,20 +149,18 @@ function renderGames() {
     gamesList.innerHTML = "";
 
     games.forEach((game, index) => {
-        const isSelected = selectedGames.includes(game);
+        const selected = selectedGames.includes(game);
 
         const card = document.createElement("div");
         card.className = "game-card";
-
         card.innerHTML = `
             <img src="assets/images/${game.image}">
             <h4>${game.name}</h4>
             <p>${game.region} - ${game.size} GB</p>
             <button onclick="toggleGame(${index})">
-                ${isSelected ? "Quitar" : "Agregar"}
+                ${selected ? "Quitar" : "Agregar"}
             </button>
         `;
-
         gamesList.appendChild(card);
     });
 }
@@ -152,7 +185,7 @@ function toggleGame(index) {
     renderGames();
 }
 
-// ===== MODAL CONFIRMACIÓN =====
+// ===== CONFIRMACIÓN =====
 function openConfirm() {
     if (selectedGames.length === 0) {
         alert("No has seleccionado juegos");
@@ -170,35 +203,14 @@ function confirmYes() {
     sendWhatsApp();
 }
 
-// ===== TXT =====
-function generateTXT() {
-    let text = `Micro SD: ${totalSpace}GB\n\nJuegos:\n`;
-
-    selectedGames.forEach(g => {
-        text += `- ${g.name} (${g.region}) - ${g.size}GB\n`;
-    });
-
-    const blob = new Blob([text], { type: "text/plain" });
-    const link = document.createElement("a");
-
-    link.href = URL.createObjectURL(blob);
-    link.download = "lista_juegos.txt";
-    link.click();
-}
-
 // ===== WHATSAPP =====
 function sendWhatsApp() {
-    let message = `🎮 Lista GameCube\n\n`;
-    message += `Micro SD: ${totalSpace}GB\n`;
-    message += `Espacio usado: ${(totalSpace - remainingSpace).toFixed(2)}GB\n\n`;
-    message += `Juegos:\n`;
+    let message = `🎮 Lista GameCube\n\nMicro SD: ${totalSpace}GB\n\n`;
 
     selectedGames.forEach(g => {
         message += `• ${g.name} (${g.region}) - ${g.size}GB\n`;
     });
 
-    const phone = "528682583401"; // ← TU NÚMERO
-    const url = `https://wa.me/${phone}?text=${encodeURIComponent(message)}`;
-
-    window.open(url, "_blank");
+    const phone = "528682583401";
+    window.open(`https://wa.me/${phone}?text=${encodeURIComponent(message)}`, "_blank");
 }
