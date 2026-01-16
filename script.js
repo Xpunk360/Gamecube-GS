@@ -51,8 +51,8 @@ const games = [
     { name: "Need for Speed Underground 2", size: 1.29, region: "USA", image: "g33.jpg" },
     { name: "Need for Speed Most Wanted", size: 1.26, region: "USA", image: "g34.jpg" },
     { name: "Tony Hawk's Pro Skater 4", size: 1.26, region: "USA", image: "g35.jpg" },
-    { name: "007 Nightfire", size: 1.29, region: "USA", image: "g36.jpg" },
-    { name: "Mortal Kombat Deception", size: 1.29, region: "USA", image: "g37.jpg" },
+    { name: "007 Nightfire", size: 1.29, region: "USA", image: "g37.jpg" },
+    { name: "Mortal Kombat Deception", size: 1.29, region: "USA", image: "g36.jpg" },
     { name: "Spiderman 2", size: 1.30, region: "USA", image: "g38.jpg" },
     { name: "Mega Man Anniversary Collection", size: 1.34, region: "USA", image: "g39.jpg" },
     { name: "Crash Nitro Kart", size: 1.35, region: "USA", image: "g40.jpg" },
@@ -214,3 +214,4 @@ function sendWhatsApp() {
     const phone = "528682583401";
     window.open(`https://wa.me/${phone}?text=${encodeURIComponent(message)}`, "_blank");
 }
+
