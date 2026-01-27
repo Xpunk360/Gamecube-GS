@@ -49,9 +49,47 @@ button {
     margin-top: 10px;
 }
 
+/* ================= STORAGE BAR (🔥 MODIFICADO) ================= */
 #storage-bar {
-    font-size: 20px;
-    margin-bottom: 15px;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: black;
+    padding: 10px 0;
+}
+
+/* CONTENEDOR DE LA BARRA */
+#storage-progress {
+    position: relative;
+    width: 100%;
+    max-width: 500px;
+    height: 24px;
+    background: #333;
+    border-radius: 12px;
+    margin: 0 auto 20px;
+    overflow: hidden;
+}
+
+/* RELLENO */
+#storage-fill {
+    height: 100%;
+    width: 0%;
+    background: linear-gradient(90deg, #6a00ff, #00e0ff);
+    transition: width 0.3s ease;
+}
+
+/* TEXTO DENTRO DE LA BARRA */
+#storage-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 14px;
+    font-weight: bold;
+    color: white;
+    text-shadow: 0 1px 3px rgba(0,0,0,0.8);
+    pointer-events: none;
+    white-space: nowrap;
 }
 
 /* 🔥 GRID DESKTOP (BASE) */
@@ -160,24 +198,6 @@ button {
     margin: 15px 0;
     border-radius: 6px;
     border: none;
-}
-
-/* ================= STORAGE BAR ================= */
-#storage-progress {
-    width: 100%;
-    max-width: 500px;
-    height: 20px;
-    background: #333;
-    border-radius: 10px;
-    margin: 10px auto 30px;
-    overflow: hidden;
-}
-
-#storage-fill {
-    height: 100%;
-    width: 0%;
-    background: linear-gradient(90deg, #6a00ff, #00e0ff);
-    transition: width 0.3s ease;
 }
 
 /* ================================================= */
