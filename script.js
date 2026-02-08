@@ -30,12 +30,10 @@ const games = [
     { name: "Pokemon Colosseum", size: .631, region: "USA", image: "g14.jpg" },
     { name: "Kirby Air Ride", size: .660, region: "USA", image: "g15.jpg" },
     { name: "Mega Man X Collection", size: .795, region: "USA", image: "g16.jpg" },
-    { name: "Resident Evil disc 1", size: 1.19, region: "USA", image: "g17.jpg" },
-    { name: "Resident Evil disc 2", size: 1.29, region: "USA", image: "g17.jpg" },
+    { name: "Resident Evil disc 1 & 2", size: 2.49, region: "USA", image: "g17.jpg" },
     { name: "Resident Evil 2", size: 1.20, region: "USA", image: "g18.jpg" },
     { name: "Resident Evil 3", size: .866, region: "USA", image: "g19.jpg" },
-    { name: "Resident Evil 4 disc 1", size: 1.25, region: "USA", image: "g20.jpg" },
-    { name: "Resident Evil 4 disc 2", size: 1.34, region: "USA", image: "g20.jpg" },
+    { name: "Resident Evil 4 disc 1 & 2", size: 2.60, region: "USA", image: "g20.jpg" },
     { name: "Simpson, Hit & Run", size: .868, region: "USA", image: "g21.jpg"},
     { name: "The Legend of Zelda Twilight Princess", size: 1.01, region: "USA", image: "g22.jpg" },
     { name: "Pokemon XD", size: 1.05, region: "USA", image: "g23.jpg" },
@@ -73,7 +71,7 @@ const games = [
     { name: "Custom Robo", size: 1.35, region: "USA", image: "g55.jpg" },
     { name: "Digimon Rumble Area 2", size: 1.35, region: "USA", image: "g56.jpg" },
     { name: "Digimon World 4", size: 1.35, region: "USA", image: "g57.jpg" },
-    { name: "Metal Gear Solid The Twin Snakes", size: 1.35, region: "USA", image: "g58.jpg" },
+    { name: "Metal Gear Solid The Twin Snakes disc 1, disc 2 wt issues", size: 1.35, region: "USA", image: "g58.jpg" },
     { name: "Beyond Good and Evil", size: 1.35, region: "USA", image: "g59.jpg" },
     { name: "Bloody Roar Primal Fury", size: 1.35, region: "USA", image: "g60.jpg" },
     { name: "Disney PK Out of the Shadows", size: 1.35, region: "USA", image: "g61.jpg" },
@@ -214,4 +212,3 @@ function sendWhatsApp() {
     const phone = "528682583401";
     window.open(`https://wa.me/${phone}?text=${encodeURIComponent(message)}`, "_blank");
 }
-
