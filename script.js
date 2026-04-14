@@ -71,15 +71,17 @@ const games = [
     { name: "Custom Robo", size: 1.35, region: "USA", image: "g55.jpg" },
     { name: "Digimon Rumble Area 2", size: 1.35, region: "USA", image: "g56.jpg" },
     { name: "Digimon World 4", size: 1.35, region: "USA", image: "g57.jpg" },
-    { name: "Metal Gear Solid The Twin Snakes disc 1, disc 2 wt issues", size: 1.35, region: "USA", image: "g58.jpg" },
+    { name: "Metal Gear Solid The Twin Snakes solo disco 1", size: 1.35, region: "USA", image: "g58.jpg" },
     { name: "Beyond Good and Evil", size: 1.35, region: "USA", image: "g59.jpg" },
     { name: "Bloody Roar Primal Fury", size: 1.35, region: "USA", image: "g60.jpg" },
     { name: "Disney PK Out of the Shadows", size: 1.35, region: "USA", image: "g61.jpg" },
     { name: "Eternal Darkness Sanity's Requiem", size: 1.35, region: "USA", image: "g62.jpg" },
     { name: "Phantasy Star Online Episode l & Plus", size: 1.35, region: "USA", image: "g63.jpg" },
-    { name: "Phantasy Star Online Episode lll", size: 1.35, region: "USA", image: "g64.jpg" }
+    { name: "Phantasy Star Online Episode lll", size: 1.35, region: "USA", image: "g64.jpg" },
+    { name: "Gameboy Player Start-up", size: 0.233, region: "USA", image: "g67.jpg" },
+    { name: "Super Smash Bros Melee AKANEIA", size: 1.35, region: "USA", image: "g66.jpg" },
+    { name: "Super Smash Bros Melee", size: 1.35, region: "USA", image: "g65.jpg" }
 ];
-
 // ===== INTRO =====
 intro.addEventListener("click", () => {
     audio.currentTime = 0;
