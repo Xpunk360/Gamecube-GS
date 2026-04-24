@@ -1,5 +1,4 @@
 const PAGE_PASSWORD = "gamecube360";
-let pendingMemory = null;
 
 const audio = document.getElementById("gc-audio");
 const intro = document.getElementById("intro");
@@ -82,6 +81,7 @@ const games = [
     { name: "Super Smash Bros Melee AKANEIA", size: 1.35, region: "USA", image: "g66.jpg" },
     { name: "Super Smash Bros Melee", size: 1.35, region: "USA", image: "g65.jpg" }
 ];
+
 // ===== INTRO =====
 intro.addEventListener("click", () => {
     audio.currentTime = 0;
@@ -93,34 +93,8 @@ audio.onended = () => {
     memorySelect.classList.remove("hidden");
 };
 
-// ===== CLICK MEMORIA (ABRE PASSWORD) =====
+// ===== SELECCIONAR MEMORIA =====
 function selectMemory(size) {
-    pendingMemory = size;
-    document.getElementById("password-modal").classList.remove("hidden");
-}
-
-// ===== PASSWORD =====
-function checkPassword() {
-    const input = document.getElementById("password-input").value;
-    const error = document.getElementById("password-error");
-
-    if (input === PAGE_PASSWORD) {
-        error.style.display = "none";
-        document.getElementById("password-modal").classList.add("hidden");
-        document.getElementById("password-input").value = "";
-        startGames(pendingMemory);
-    } else {
-        error.style.display = "block";
-    }
-}
-
-function closePasswordModal() {
-    document.getElementById("password-modal").classList.add("hidden");
-    document.getElementById("password-input").value = "";
-}
-
-// ===== ENTRAR A JUEGOS =====
-function startGames(size) {
     totalSpace = size;
     remainingSpace = size;
 
@@ -185,15 +159,40 @@ function toggleGame(index) {
     renderGames();
 }
 
-// ===== CONFIRMACIÓN =====
+// ===== BOTÓN ENVIAR =====
 function openConfirm() {
     if (selectedGames.length === 0) {
         alert("No has seleccionado juegos");
         return;
     }
-    confirmModal.classList.remove("hidden");
+
+    // ahora primero pide contraseña
+    document.getElementById("password-modal").classList.remove("hidden");
 }
 
+// ===== PASSWORD =====
+function checkPassword() {
+    const input = document.getElementById("password-input").value;
+    const error = document.getElementById("password-error");
+
+    if (input === PAGE_PASSWORD) {
+        error.style.display = "none";
+        document.getElementById("password-modal").classList.add("hidden");
+        document.getElementById("password-input").value = "";
+
+        // ahora sí abre confirmación
+        confirmModal.classList.remove("hidden");
+    } else {
+        error.style.display = "block";
+    }
+}
+
+function closePasswordModal() {
+    document.getElementById("password-modal").classList.add("hidden");
+    document.getElementById("password-input").value = "";
+}
+
+// ===== CONFIRMACIÓN =====
 function confirmNo() {
     confirmModal.classList.add("hidden");
 }
